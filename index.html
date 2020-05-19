@@ -1,1 +1,38 @@
-<h1>Or maybe this page</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The narrative video player</title>
+    <link rel="stylesheet" href="sources/style.css">
+    
+  </head>
+  <body>
+
+
+	<div id="title">
+		<span id="t">the</span>
+		<span id="n">narrative</span>
+		<span id="v">video player</span>
+	</div>
+
+	<div id="mynvvid" class="nvp-video-container">
+		
+	    
+	</div>
+
+
+	<script>
+		var options = {
+			ContainerId: "mynvvid",
+			images: [
+				{"url": "montagne.jpg", "start": "00:00"},
+				{"url": "nuages.jpg", "start": "00:07"},
+				{"url": "voitures.jpg", "start": "00:14"},
+				{"url": "buildings.jpg", "start": "00:22"}	
+				],
+			videoSource: "video.mp4",		
+		};
+	</script>
+	<script src="narrative-video-player.js"></script>
+  </body>
+</html>
