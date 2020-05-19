@@ -8,110 +8,22 @@
   </head>
   <body>
 
-	<div class="nvp-video-container">
+	<div id="mynvvid" class="nvp-video-container">
 		
-	    <video class="video">
-		  	<source src="video.mp4" type="video/mp4">
-		  	
-		  		Your browser does not support HTML video.
-		</video>
-		
-<!-- 
-		<div class="narrative-display">
-			<div class="narrative-image">				
-				<img src="montagne.jpg">
-			</div>
-			<div class="narrative-text">
-				<p>The beautiful mountains of New Zealand</p>		
-			</div>
-		</div> -->
-
-
-		<div class="controls-background">
-			
-		</div>
-
-		<div class="controls unselectable">
-
-
-			<div class="narratives">
-					
-					<div class="narratives-slider">
-						<div class='narrative'>
-							<img src='montagne.jpg' data-time='00:00' data-text="The beautiful mountains of New Zealand">
-						</div>
-						<div class='narrative'>
-							<img src='nuages.jpg' data-time='00:07' data-text="The clouds make a blanket under the sky">
-						</div>
-						<div class='narrative'>
-							<img src='voitures.jpg' data-time='00:14' data-text="This car park is amazing">
-						</div>
-						<div class='narrative'>
-							<img src='buildings.jpg' data-time='00:22' data-text="A city from top is always an impressive view">
-						</div>
-					
-					</div>
-					
-			</div>
-
-			<div class="interact">
-
-				<!--  -->
-				<div class="left">
-					<div class="play-button">				
-					</div>
-
-					<div class="sound-button">				
-					</div>
-
-					<div class="sound-slider">
-						<!-- <div class="slider-container">
-							<div type="range" tabindex="0" class="slider-handle" data-handle="0" role="slider" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">j
-								
-							</div>
-						</div> -->
-						<input type="range" min="0" max="100" value="100">
-							
-						
-					</div>
-				</div>
-
-				
-				
-				
-
-				<div class="right">
-					<div class="full-screen">				
-					</div>
-				</div>
-
-				
-			</div>
-
-			<div class="progress-bar-container">
-				<div class="progress-bar">
-					<div class="current-progress">
-					</div>
-					<div class="narrative-position invisible">
-						
-					</div>
-				</div>
-			</div>
-			
-
-		</div>
+	    
 	</div>
 
 
 	<script>
 		var options = {
+			ContainerId: "mynvvid",
 			images: [
-				{"url": "mountain.png", "start": "00:00"},
-				{"url": "nuage.png", "start": "00:07"},
-				{"url": "voiture.png", "start": "00:14"},
-				{"url": "immeuble-200-leger-min.png", "start": "00:22"}	
+				{"url": "montagne.jpg", "start": "00:00"},
+				{"url": "nuages.jpg", "start": "00:07"},
+				{"url": "voitures.jpg", "start": "00:14"},
+				{"url": "buildings.jpg", "start": "00:22"}	
 				],
-						
+			videoSource: "video.mp4",		
 		};
 	</script>
 	<script src="narrative-video-player.js"></script>

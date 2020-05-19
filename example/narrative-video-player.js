@@ -1,17 +1,75 @@
 
 
-// function init( args ) {
+
+let nvpContainer = document.querySelector(`#${options.ContainerId}`);
+
+function generateHTML (options) {
+	let narrativesChildren = "";
+	options.images.map(function(narr){
+		
+		narrativesChildren += `
+					<div class='narrative'>
+						<img src='${narr.url}' data-time='${narr.start}' data-text="The beautiful mountains of New Zealand">
+					</div>
+		`
+	});
+
+
+	nvpContainer.innerHTML += `
+		<video class="video">
+		  	<source src="${options.videoSource}" type="video/mp4">
+		  	
+		  		Your browser does not support HTML video.
+		</video>
+		
+		<div class="controls-background">
+		</div>
+
+		<div class="controls unselectable">
+			<div class="narratives">
+				<div class="narratives-slider">
+					${narrativesChildren}
+				</div>					
+			</div>	
+			
+			<div class="interact">
+
+					
+					<div class="left">
+						<div class="play-button">				
+						</div>
+
+						<div class="sound-button">				
+						</div>
+
+						<div class="sound-slider">						
+							<input type="range" min="0" max="100" value="100">						
+						</div>
+					</div>				
+					
+
+					<div class="right">
+						<div class="full-screen">				
+						</div>
+					</div>
+
+			</div>	
+
+			<div class="progress-bar-container">
+				<div class="progress-bar">
+					<div class="current-progress">
+					</div>
+					<div class="narrative-position invisible">						
+					</div>
+				</div>
+			</div>
+		</div>
 	
-// 	args.images.forEach(function(image){
-// 		document.querySelector('.narratives-slider').innerHTML += `<div class='narrative'>
-// 							<img src='${image.url}' data-time='${image.start}'>
-// 						</div>`
+		`;
+		
+}
 
-// 	});    // this.value = 'value' in args ? args.value : defaults.value;
-// }
-
-// init(options);
-
+generateHTML(options);
 
 const narrativesSlider = document.querySelector('.narratives-slider');
 const narrativesWindow = document.querySelector('.narratives');
@@ -241,6 +299,21 @@ function narrativeBarSize (narrative) {
 	narrativePos.style.width = narrDurationPix+"px";
 	
 }
+
+
+
+
+// function init( args ) {
+	
+// 	args.images.forEach(function(image){
+// 		document.querySelector('.narratives-slider').innerHTML += `<div class='narrative'>
+// 							<img src='${image.url}' data-time='${image.start}'>
+// 						</div>`
+
+// 	});    // this.value = 'value' in args ? args.value : defaults.value;
+// }
+
+// init(options);
 
 
 
