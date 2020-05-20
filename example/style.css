@@ -187,6 +187,11 @@ video {
 	width: auto;
 	margin: 5px 10px 0 10px;
 }
+	
+	.button {
+		border: none;
+		background-color: transparent;
+	}
 
 	.left {
 		height: 18px;
@@ -205,8 +210,8 @@ video {
 		 	display: inline-block;
 		 	text-align: center;
 		 	vertical-align: center;
-		 	/*border: 1px solid red;*/
-		 	/*vertical-align: middle;*/
+
+		 	
 
 		}
 
@@ -217,14 +222,14 @@ video {
 		}
 
 		.sound-button {
-			width: 26px;
+			width: 34px;
 			height: 18px;
-		 	display: block;
-		 	margin: 0 0 0 15px;
+		 	
+		 	/*margin: 0 0 0 15px;*/
 		 	cursor: pointer;
 		 	display: inline-block;
-		 	/*border: 1px solid red;*/
-		 	/*vertical-align: middle*/
+		 	text-align: center;
+		 	
 		}
 
 		.sound-button svg {
@@ -235,13 +240,9 @@ video {
 		.sound-slider {
 			width: 55px;
 			height: 18px;
-		 	display: inline-block;
-		 	margin: 0 14px 0 14px;
-		 	cursor: pointer;
-		 	/*display: inline-block;*/
-		 	/*border: 1px solid red;*/
-		 	margin: 0;
-		 		 
+		 	display: inline-block;		 	
+		 	cursor: pointer;		 	
+		 	margin: 0;		 		 
 		 	line-height: 1;
 		 	position: absolute;	
 		 	bottom: 1px;
@@ -249,28 +250,29 @@ video {
 
 	.right {
 		height: 18px;
-		width: 40px;	
-		/*display: inline-block;*/
-		/*border: 1px solid red;*/
 		position: absolute;
 		right: 0;
 		bottom: 0;
 	}	
 
 		.full-screen {
-			width: 26px;
 			height: 18px;
+			width: 22px;			
 		 	display: block;
-		 	margin: 0 0 0 15px;
 		 	cursor: pointer;
-		 	display: inline-block;
-		 	/*border: 1px solid red;*/
-		 	vertical-align: middle
+		 	display: inline-block;		 	
+		 	vertical-align: middle;
+		 	text-align: center;
+		 	position: relative;
 		}
 
 		.full-screen svg {
 			height: 100%;
 			width: auto;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+
 		}
 
 
