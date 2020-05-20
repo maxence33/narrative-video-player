@@ -16,21 +16,29 @@ body {
 #title #t {
 	font-size: 120px;
 	display: block;
-	text-shadow: 20px 10px 70px rgba(0, 0, 0, 0.5);
+	/*text-shadow: 20px 10px 90px rgba(0, 0, 0, 0.3);*/
 
 }
 
 #title #n {
 	font-size: 120px;
 	display: block;
-	text-shadow: 20px 10px 70px rgba(0, 0, 0, 0.5);
+	/*text-shadow: 20px 10px 90px rgba(0, 0, 0, 0.3);*/
 	margin-top: -60px;
 }
 
 #title #v {
 	font-size: 120px;
 	display: block;
-	text-shadow: 20px 10px 70px rgba(0, 0, 0, 0.5);
+	/*text-shadow: 20px 10px 90px rgba(0, 0, 0, 0.3);*/
 	margin-top: -25px;
 	line-height: 0.66;
+	color: #ff5b9e;
+}
+
+#intro {
+	margin: 30px 0 0 0;
+	font-size: 1.4em;
+	color: white;
+
 }
