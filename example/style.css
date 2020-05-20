@@ -18,6 +18,17 @@
 	transform: translateY(0);
 }
 
+.clean-video-container {
+	border : 0 !important;
+    border-style : none !important;
+    animation : none !important;
+    background : 0 !important;
+    margin : 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    opacity : 1 !important;
+}
+
 
 
 /*Video*/
@@ -130,7 +141,7 @@ video {
 		/*position: absolute;*/
 		position: relative;
 		bottom: 0;
-		height: 60px; /*this value will be continuously reset*/
+		height: 10%; /*this value will be continuously reset*/
 		font-size: 0;
 		width: 200%;
 		text-align: center;
@@ -349,9 +360,7 @@ video {
 	transform: translateY(100%);
 }
 
-.extanded-position {
-	transform: translateY(0);
-}
+
 
 
 
@@ -501,6 +510,9 @@ input[type=range]:focus::-ms-fill-upper {
 
 /*full screen */
 
-::-webkit-media-controls {
+video::-webkit-media-controls {
+  display:none !important;
+}
+video::-webkit-media-controls-enclosure {
   display:none !important;
 }

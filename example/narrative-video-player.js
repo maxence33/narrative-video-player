@@ -82,7 +82,7 @@ const progressBar = document.querySelector('.current-progress');
 const fullScreenButton = document.querySelector('.full-screen');
 const controlsBackground = document.querySelector(".nvp-video-container .controls-background");
 const controls = document.querySelector('.controls');
-const progressContainer = document.querySelector(".progress-bar");
+const progressContainer = document.querySelector(".progress-bar-container");
 const narrativePos = document.querySelector(".narrative-position");
 	
 
@@ -95,6 +95,8 @@ const fullScreenIcon = `<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" 
 playButton.innerHTML = playImage;
 soundButton.innerHTML = soundIcon;
 fullScreenButton.innerHTML = fullScreenIcon;
+
+
 
 function narrativeSliderResize() {
 	let sliderDivSize = 0;
@@ -194,24 +196,29 @@ function videoProgress () {
 	progressBar.style.width = `${progressValue}%`;
 }
 
-function toggleFullScreen() {
-  if (video.requestFullscreen) {
-    video.requestFullscreen();
-  } else if (video.mozRequestFullScreen) { /* Firefox */
-    video.mozRequestFullScreen();
-  } else if (video.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-    video.webkitRequestFullscreen();
-  } else if (video.msRequestFullscreen) { /* IE/Edge */
-    video.msRequestFullscreen();
-  }
+function toggleFullScreen(element) {
+	const addFullScreen = element.requestFullscreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+	const removeFullScreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen || document.msExitFullscreen;
+  
+
+  if (document.fullscreen) {
+  	removeFullScreen.call(document); 
+  	nvpContainer.classList.remove('clean-video-container');   
+  } else { 
+    addFullScreen.call(element);
+    nvpContainer.classList.add('clean-video-container');
+  }; 
+
 }
 
-function resizeNarratives () {
+function narrativesIconsResize () {
+	// problem of setting original height
+	// maybe because of Dom content loaded ?
 	let sliderHeight = Math.round(video.offsetHeight/10);
 	narrativesSlider.style.height = sliderHeight+"px";
 }
 
-function narrativeBarSize (narrative) {
+function narrativeProgressBarHighlight (narrative) {
 	let pixBySecond = progressContainer.offsetWidth / video.duration;
 
 	let narrDuration = 0;
@@ -229,20 +236,12 @@ function narrativeBarSize (narrative) {
 	
 }
 
+function navigateThroughProgressBar (e) {
+	const startPoint = e.offsetX / progressContainer.offsetWidth * video.duration
+	video.currentTime = startPoint;
+}
 
 
-
-// function init( args ) {
-	
-// 	args.images.forEach(function(image){
-// 		document.querySelector('.narratives-slider').innerHTML += `<div class='narrative'>
-// 							<img src='${image.url}' data-time='${image.start}'>
-// 						</div>`
-
-// 	});    // this.value = 'value' in args ? args.value : defaults.value;
-// }
-
-// init(options);
 
 
 
@@ -250,7 +249,7 @@ function narrativeBarSize (narrative) {
 narratives.forEach( function(narrative) {
 	narrative.addEventListener("click", narrativePlay);	
 	narrative.addEventListener("mouseover", function() {
-		narrativeBarSize(narrative);
+		narrativeProgressBarHighlight(narrative);
 		narrativePos.classList.remove('invisible');
 	});
 	narrative.addEventListener("mouseout", function() {		
@@ -258,6 +257,7 @@ narratives.forEach( function(narrative) {
 	});
 	// factor(narrative);
 });
+progressContainer.addEventListener("click", navigateThroughProgressBar);
 playButton.addEventListener("click", playVideo);
 video.addEventListener("click", playVideo);
 video.addEventListener("ended", function(){alterPlayButton(playImage); keepExtended (); });
@@ -265,27 +265,26 @@ video.addEventListener("ended", function(){alterPlayButton(playImage); keepExten
 
 
 
-let soundChange = false;
+let soundBeingChanged = false;
 let lastSavedVolume = 1;
 soundButton.addEventListener("click", toggleSound);
-soundSlider.addEventListener("mousedown", () => soundChange = true);
-soundSlider.addEventListener("mousemove", () => soundChange && soundVolume());
-soundSlider.addEventListener("mouseup", () => soundChange = false);
+soundSlider.addEventListener("mousedown", () => soundBeingChanged = true);
+soundSlider.addEventListener("mousemove", () => soundBeingChanged && soundVolume());
+soundSlider.addEventListener("mouseup", () => soundBeingChanged = false);
 soundSlider.addEventListener("change", soundVolume);
 
 video.addEventListener('timeupdate', videoProgress);
-fullScreenButton.addEventListener("click", toggleFullScreen);
+fullScreenButton.addEventListener("click", function (e) {
+	toggleFullScreen(nvpContainer);
 
-window.addEventListener("resize", function () {
-	// narrativeSliderResize(); 
-	// positionningSlider();
-	resizeNarratives();
+});
+
+window.addEventListener("resize", function () {	
+	narrativesIconsResize();
 })
 
 window.addEventListener('DOMContentLoaded', function () {
-// narrativeSliderResize();
-// positionningSlider();
-	resizeNarratives();
+	narrativesIconsResize();
 });
 
 
