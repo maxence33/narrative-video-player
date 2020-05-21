@@ -165,6 +165,7 @@ video {
 	 		padding: 0;
 			height: 100%;
 			width: auto;
+			
 			filter: grayscale(0.10) opacity(0.9) contrast(0.8) brightness(1.2);
 			-webkit-filter: grayscale(0.10) opacity(0.9) contrast(0.8) brightness(1.2);
 		}

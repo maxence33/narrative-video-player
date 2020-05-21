@@ -1,15 +1,15 @@
 
-
+// building the HTML inside passed id
 
 let nvpContainer = document.querySelector(`#${options.ContainerId}`);
 
 function generateHTML (options) {
 	let narrativesChildren = "";
-	options.images.map(function(narr){
+	options.images.map(function(narr, index){
 		
 		narrativesChildren += `
-					<div class='narrative'>
-						<img src='${narr.url}' data-time='${narr.start}' data-text="The beautiful mountains of New Zealand">
+					<div class='narrative' role="button" tabindex="${index + 1}">
+						<img src='${narr.url}' data-time='${narr.start}' data-text='${narr.description}'>
 					</div>
 		`
 	});
@@ -36,20 +36,20 @@ function generateHTML (options) {
 
 					
 					<div class="left">
-						<button class="play-button button" alt="play video" tabindex="1">				
+						<button class="play-button button" alt="play video" tabindex="${options.images.length + 1}">				
 						</button>
 
-						<button class="sound-button button" alt="toggle sound" tabindex="2">				
+						<button class="sound-button button" alt="toggle sound" tabindex="${options.images.length + 2}">				
 						</button>
 
 						<div class="sound-slider">						
-							<input type="range" min="0" max="100" value="100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" tabindex="3">						
+							<input type="range" min="0" max="100" value="100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" tabindex="${options.images.length + 3}">						
 						</div>
 					</div>				
 					
 
 					<div class="right">
-						<button class="full-screen button" alt="toggle fullscreen" tabindex="4">				
+						<button class="full-screen button" alt="toggle fullscreen" tabindex="${options.images.length + 4}">				
 						</button>
 					</div>
 
@@ -71,6 +71,8 @@ function generateHTML (options) {
 
 generateHTML(options);
 
+// initializing elements to be listened to or subjects to JS changes
+
 const narrativesSlider = document.querySelector('.narratives-slider');
 const narrativesWindow = document.querySelector('.narratives');
 const narratives = document.querySelectorAll('.narrative');
@@ -84,8 +86,6 @@ const controlsBackground = document.querySelector(".nvp-video-container .control
 const controls = document.querySelector('.controls');
 const progressContainer = document.querySelector(".progress-bar-container");
 const narrativePos = document.querySelector(".narrative-position");
-	
-
 const playImage= `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3.049 3.74" height="14.136" width="11.525"><path d="M.002 3.499c0 .223.156.306.348.187l2.556-1.599c.192-.12.19-.315 0-.435L.349.054C.156-.066 0 .022 0 .241V3.5h.002z" fill="#fff"/></svg>`;
 const pauseImage = `<svg width="69.4" height="82.1" viewBox="0 0 18.4 21.7" xmlns="http://www.w3.org/2000/svg"><g fill="#f9f9f9" color="#000"><path d="M3.3 0A3 3 0 00.9 1.3c-.5.8-.9 1.9-.9 3v13c0 1.2.4 2.3 1 3.1a3 3 0 002.3 1.3 3 3 0 002.3-1.3c.6-.8 1-1.9 1-3v-13c0-1.2-.4-2.3-1-3.1A3 3 0 003.3 0zM15 0a3 3 0 00-2.3 1.3c-.6.8-1 1.9-1 3v13c0 1.2.4 2.3 1 3.1a3 3 0 002.4 1.3 3 3 0 002.3-1.3c.6-.8 1-1.9 1-3v-13c0-1.2-.4-2.3-1-3.1A3 3 0 0015.1 0z"/></g></svg>` ;
 const soundIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4.18 3.84" height="14.53" width="15.8"><path d="M.64.96A.64.64 0 000 1.6v.64c0 .36.29.64.64.64h.4l1.09.96V0L1.04.96zm2.26.96c0-.19-.13-.32-.32-.32v.64c.2 0 .32-.13.32-.32zm.64 0A.96.96 0 002.8 1l-.1.3c.3.06.52.31.52.63s-.22.58-.51.64l.13.3c.38-.1.7-.49.7-.94zM2.76.31L2.63.6c.8.12 1.23.75 1.23 1.32 0 .58-.5 1.12-1.15 1.28l.12.29c.73-.16 1.35-.83 1.35-1.57 0-.73-.57-1.5-1.42-1.61z" fill="#fff"/></svg>`;
@@ -96,28 +96,26 @@ playButton.innerHTML = playImage;
 soundButton.innerHTML = soundIcon;
 fullScreenButton.innerHTML = fullScreenIcon;
 
+// functions
 
 
-function narrativeSliderResize() {
-	let sliderDivSize = 0;
-	narratives.forEach( function(narrative) {
-		sliderDivSize += narrative.offsetWidth;	
-		console.log(narrative.offsetWidth);	
-	});
-	// we get inconsistent results when running this function multiple times 
-	// probably a rounding issue in trying to get elements sizes 
-	// then we add a bit of room to the slider div by adding half a pixel for each child
-	sliderDivSize = sliderDivSize + narratives.length ;
-	narrativesSlider.style.width = sliderDivSize+"px";
-	console.log(sliderDivSize);
+// function narrativeSliderResize() {
+// 	let sliderDivSize = 0;
+// 	narratives.forEach( function(narrative) {
+// 		sliderDivSize += narrative.offsetWidth;	
+// 		console.log(narrative.offsetWidth);	
+// 	});
 	
-	
-}
+// 	sliderDivSize = sliderDivSize + narratives.length ;
+// 	narrativesSlider.style.width = sliderDivSize+"px";
+// 	console.log(sliderDivSize);	
+// }
 
-function positionningSlider() {
-	let sliderOffset = (narrativesWindow.offsetWidth - narrativesSlider.offsetWidth) /2;
-	narrativesSlider.style.left = sliderOffset+"px";
-}
+
+// function positionningSlider() {
+// 	let sliderOffset = (narrativesWindow.offsetWidth - narrativesSlider.offsetWidth) /2;
+// 	narrativesSlider.style.left = sliderOffset+"px";
+// }
 
 
 
@@ -130,8 +128,7 @@ function playVideo() {
 		video.pause();
 		playButton.innerHTML = playImage;	
 		keepExtended();	
-	}
-	
+	}	
 }
 
 function keepExtended () {
@@ -158,9 +155,14 @@ function narrativePlay() {
 
 function convertTime (narrative) {
 	let time = narrative.querySelector('img').dataset.time;
-	let splitTime = time.split(':');
-	let seconds = (parseInt(splitTime[0])*60)+parseInt(splitTime[1]);
-	return seconds
+	const splitTime = time.split(':').reverse();
+	let seconds = 0;
+	
+	for (i=0; i < splitTime.length; i++) {
+		seconds += parseInt(splitTime[i])*Math.pow(60,i);			
+	};
+	
+	return seconds;
 }
 
 function unFade () {
