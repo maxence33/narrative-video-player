@@ -9,7 +9,7 @@ function generateHTML (options) {
 		
 		narrativesChildren += `
 					<div class='narrative' role="button" tabindex="0">
-						<img src='${narr.url}' data-time='${narr.start}' data-text='${narr.description}'>
+						<img src='${narr.url}' data-time='${narr.start}' data-title='${narr.title}'>
 					</div>
 		`
 	});
@@ -232,7 +232,7 @@ function navigateThroughProgressBar (e) {
 }
 
 function populateNarrativeDesc (narrative) {
-	narrativeDesc.innerHTML = `<p>${narrative.querySelector('img').dataset.text}</p>`;
+	narrativeDesc.innerHTML = `<p>${narrative.querySelector('img').dataset.title}</p>`;
 }
 
 
