@@ -5,10 +5,10 @@ let nvpContainer = document.querySelector(`#${options.ContainerId}`);
 
 function generateHTML (options) {
 	let narrativesChildren = "";
-	options.images.map(function(narr, index){
+	options.images.map(function(narr){
 		
 		narrativesChildren += `
-					<div class='narrative' role="button" tabindex="${index + 1}">
+					<div class='narrative' role="button" tabindex="0">
 						<img src='${narr.url}' data-time='${narr.start}' data-text='${narr.description}'>
 					</div>
 		`
@@ -25,7 +25,15 @@ function generateHTML (options) {
 		<div class="controls-background">
 		</div>
 
+		
+		
+
 		<div class="controls unselectable">
+			
+			<div class="text-display invisible">
+			
+			</div>
+
 			<div class="narratives">
 				<div class="narratives-slider">
 					${narrativesChildren}
@@ -36,20 +44,20 @@ function generateHTML (options) {
 
 					
 					<div class="left">
-						<button class="play-button button" alt="play video" tabindex="${options.images.length + 1}">				
+						<button class="play-button button" alt="play video" tabindex="0">				
 						</button>
 
-						<button class="sound-button button" alt="toggle sound" tabindex="${options.images.length + 2}">				
+						<button class="sound-button button" alt="toggle sound" tabindex="0">				
 						</button>
 
 						<div class="sound-slider">						
-							<input type="range" min="0" max="100" value="100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" tabindex="${options.images.length + 3}">						
+							<input type="range" min="0" max="100" value="100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" tabindex="0">						
 						</div>
 					</div>				
 					
 
 					<div class="right">
-						<button class="full-screen button" alt="toggle fullscreen" tabindex="${options.images.length + 4}">				
+						<button class="full-screen button" alt="toggle fullscreen" tabindex="0">				
 						</button>
 					</div>
 
@@ -91,32 +99,13 @@ const pauseImage = `<svg width="69.4" height="82.1" viewBox="0 0 18.4 21.7" xmln
 const soundIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4.18 3.84" height="14.53" width="15.8"><path d="M.64.96A.64.64 0 000 1.6v.64c0 .36.29.64.64.64h.4l1.09.96V0L1.04.96zm2.26.96c0-.19-.13-.32-.32-.32v.64c.2 0 .32-.13.32-.32zm.64 0A.96.96 0 002.8 1l-.1.3c.3.06.52.31.52.63s-.22.58-.51.64l.13.3c.38-.1.7-.49.7-.94zM2.76.31L2.63.6c.8.12 1.23.75 1.23 1.32 0 .58-.5 1.12-1.15 1.28l.12.29c.73-.16 1.35-.83 1.35-1.57 0-.73-.57-1.5-1.42-1.61z" fill="#fff"/></svg>`;
 const noSoundIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4.18 3.84" height="14.53" width="15.8"><path d="M2.78 1.26l-.26.26.4.4-.4.4.26.26.4-.4.4.4.25-.26-.4-.4.4-.4-.25-.26-.4.4zM.64.96A.64.64 0 000 1.6v.64c0 .36.29.64.64.64h.4l1.09.96V0L1.04.96z" color="#000" fill="#fff"/></svg>`;
 const fullScreenIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve"><g><path style="color:#000000;fill:#ffffff" d="M51,229.5H0V357h127.5v-51H51V229.5z M0,127.5h51V51h76.5V0H0V127.5z M306,306h-76.5v51H357V229.5h-51V306z M229.5,0v51 H306v76.5h51V0H229.5z"/></g></svg>`;
+const narrativeDesc = document.querySelector(".text-display"); 
 
 playButton.innerHTML = playImage;
 soundButton.innerHTML = soundIcon;
 fullScreenButton.innerHTML = fullScreenIcon;
 
 // functions
-
-
-// function narrativeSliderResize() {
-// 	let sliderDivSize = 0;
-// 	narratives.forEach( function(narrative) {
-// 		sliderDivSize += narrative.offsetWidth;	
-// 		console.log(narrative.offsetWidth);	
-// 	});
-	
-// 	sliderDivSize = sliderDivSize + narratives.length ;
-// 	narrativesSlider.style.width = sliderDivSize+"px";
-// 	console.log(sliderDivSize);	
-// }
-
-
-// function positionningSlider() {
-// 	let sliderOffset = (narrativesWindow.offsetWidth - narrativesSlider.offsetWidth) /2;
-// 	narrativesSlider.style.left = sliderOffset+"px";
-// }
-
 
 
 function playVideo() {	
@@ -145,10 +134,10 @@ function alterPlayButton(target) {
 	playButton.innerHTML = target;
 }
 
-function narrativePlay() {
+function narrativePlay(narrative) {	
 	video.play();
 	playButton.innerHTML = pauseImage;
-	video.currentTime = convertTime(this);
+	video.currentTime = convertTime(narrative);
 	keepRetracted ();
 	unFade();
 }
@@ -201,8 +190,7 @@ function videoProgress () {
 function toggleFullScreen(element) {
 	const addFullScreen = element.requestFullscreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
 	const removeFullScreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen || document.msExitFullscreen;
-  
-
+ 
   if (document.fullscreen) {
   	removeFullScreen.call(document); 
   	nvpContainer.classList.remove('clean-video-container');   
@@ -216,8 +204,8 @@ function toggleFullScreen(element) {
 function narrativesIconsResize () {
 	// problem of setting original height
 	// maybe because of Dom content loaded ?
-	let sliderHeight = Math.round(video.offsetHeight/10);
-	narrativesSlider.style.height = sliderHeight+"px";
+	let sliderHeight = nvpContainer.offsetHeight/10;	
+	narrativesSlider.style.height = sliderHeight+"px";	
 }
 
 function narrativeProgressBarHighlight (narrative) {
@@ -243,30 +231,48 @@ function navigateThroughProgressBar (e) {
 	video.currentTime = startPoint;
 }
 
+function populateNarrativeDesc (narrative) {
+	narrativeDesc.innerHTML = `<p>${narrative.querySelector('img').dataset.text}</p>`;
+}
 
 
 
-
+// narratives listeners
 
 narratives.forEach( function(narrative) {
-	narrative.addEventListener("click", narrativePlay);	
+	narrative.addEventListener("click", () => narrativePlay(narrative));	
+	narrative.addEventListener("keypress", function (e) {				
+		if (e.charCode == 32 ){
+			narrativePlay(narrative);
+		}
+	})
 	narrative.addEventListener("mouseover", function() {
 		narrativeProgressBarHighlight(narrative);
 		narrativePos.classList.remove('invisible');
+		populateNarrativeDesc(narrative);
+		narrativeDesc.classList.remove('invisible');
+
 	});
 	narrative.addEventListener("mouseout", function() {		
 		narrativePos.classList.add('invisible');
-	});
-	// factor(narrative);
+		narrativeDesc.classList.add('invisible');
+	});	
 });
-progressContainer.addEventListener("click", navigateThroughProgressBar);
-playButton.addEventListener("click", playVideo);
-video.addEventListener("click", playVideo);
-video.addEventListener("ended", function(){alterPlayButton(playImage); keepExtended (); });
+
+window.addEventListener("resize", function () {	
+	narrativesIconsResize();
+})
+
+// was getting wrong values, the below helps as per https://stackoverflow.com/questions/41674184/get-incorrect-offsetwidth-and-offsetheight-values
+
+setTimeout(function(){ 
+	narrativesIconsResize(); }
+	, 10);
 
 
+// control listeners
 
-
+// Sound
 let soundBeingChanged = false;
 let lastSavedVolume = 1;
 soundButton.addEventListener("click", toggleSound);
@@ -275,19 +281,27 @@ soundSlider.addEventListener("mousemove", () => soundBeingChanged && soundVolume
 soundSlider.addEventListener("mouseup", () => soundBeingChanged = false);
 soundSlider.addEventListener("change", soundVolume);
 
-video.addEventListener('timeupdate', videoProgress);
+// Play
+
+playButton.addEventListener("click", playVideo);
+video.addEventListener("click", playVideo);
+video.addEventListener("ended", function(){
+	alterPlayButton(playImage); 
+	keepExtended (); 
+});
+
+// Fullscreen
 fullScreenButton.addEventListener("click", function (e) {
 	toggleFullScreen(nvpContainer);
 
 });
 
-window.addEventListener("resize", function () {	
-	narrativesIconsResize();
-})
+// Progress
+progressContainer.addEventListener("click", navigateThroughProgressBar);
+video.addEventListener('timeupdate', videoProgress);
 
-window.addEventListener('DOMContentLoaded', function () {
-	narrativesIconsResize();
-});
+
+
 
 
 
