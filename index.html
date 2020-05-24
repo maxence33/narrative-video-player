@@ -32,11 +32,11 @@
 
 	<div class="credits">
 		<h2>Credits</h2>
-		<p>music : Camille Saint Saens - https://commons.wikimedia.org/wiki/File:Camille_Saint-Sa%C3%ABns_-_The_Carnival_of_the_Animals.ogg - Open Audio license</p>
-		<p>1st clip : from Pexels by Damon Hall https://www.pexels.com/video/aerial-footage-of-the-scenic-view-of-new-zealand-countryside-2869681/</p>
-		<p>2nd clip : from Pexels by Tom Fisk https://www.pexels.com/video/drone-footage-of-motor-vehicles-parked-on-a-storage-lot-3864111/</p>
-		<p>3rd clip : from Pexels by Kelly Lacey https://www.pexels.com/video/drone-shot-of-low-lying-clouds-over-the-mountain-valley-4287981/</p>
-		<p>4th clip : from Pexels by Kelly Lacey https://www.pexels.com/video/aeerial-view-of-city-with-tall-buildings-2818546/</p>
+		<p>music : Camille Saint Saens - <a href="https://commons.wikimedia.org/wiki/File:Camille_Saint-Sa%C3%ABns_-_The_Carnival_of_the_Animals.ogg">link</a> - Open Audio license</p>
+		<p>1st clip : from Pexels by Damon Hall <a href="https://www.pexels.com/video/aerial-footage-of-the-scenic-view-of-new-zealand-countryside-2869681/">link</a></p>
+		<p>2nd clip : from Pexels by Kelly Lacey <a href="https://www.pexels.com/video/drone-shot-of-low-lying-clouds-over-the-mountain-valley-4287981/">link</a></p>
+		<p>3rd clip : from Pexels by Tom Fisk <a href="https://www.pexels.com/video/drone-footage-of-motor-vehicles-parked-on-a-storage-lot-3864111/">link</a></p>
+		<p>4th clip : from Pexels by Kelly Lacey <a href="https://www.pexels.com/video/aeerial-view-of-city-with-tall-buildings-2818546/">link</a></p>
 		<p>All excerpts are released under a free to use license. Also if an error has been made, please enquire and we will remove.</p>
 	</div>
 
@@ -53,6 +53,12 @@
 			videoSource: "./example/video.mp4",
 			textDisplay: "title", // no, title, titleAndDesc		
 		};
+
+		const githubRepo = fetch('https://api.github.com/repos/maxence33/narrative-video-player')
+  			.then(response => response.json())
+  			.then(data => console.log(data));
+
+  			console.log()
 	</script>
 	<script src="./nvp-source-v01/nvp.js"></script>
   </body>
