@@ -3,6 +3,7 @@
 
 let nvpContainer = document.querySelector(`#${options.ContainerId}`);
 
+
 function generateHTML (options) {
 	let narrativesChildren = "";
 	options.images.map(function(narr){
@@ -10,10 +11,25 @@ function generateHTML (options) {
 		narrativesChildren += `
 					<div class='narrative' role="button" tabindex="0">
 						<img src='${narr.url}' data-time='${narr.start}' data-title='${narr.title}'>
+						<div class='inner-progress invisible'>
+							<div class='inner-progress-default'>
+								<div class='inner-progress-advance'>
+								</div>
+							</div>
+						</div>
 					</div>
 		`
 	});
 
+
+	let textDisplay = "";
+	if (options.textDisplay != "no") {
+		textDisplay = `
+			<div class="text-display invisible">
+			
+			</div>
+		`
+	};
 
 	nvpContainer.innerHTML += `
 		<video class="video">
@@ -30,9 +46,7 @@ function generateHTML (options) {
 
 		<div class="controls unselectable">
 			
-			<div class="text-display invisible">
-			
-			</div>
+			${textDisplay}
 
 			<div class="narratives">
 				<div class="narratives-slider">
@@ -201,11 +215,15 @@ function toggleFullScreen(element) {
 
 }
 
-function narrativesIconsResize () {
+function narrativesIconsResize (factor) {
 	// problem of setting original height
-	// maybe because of Dom content loaded ?
-	let sliderHeight = nvpContainer.offsetHeight/10;	
+	let sliderHeight = Math.round(nvpContainer.offsetHeight / factor);	
 	narrativesSlider.style.height = sliderHeight+"px";	
+}
+
+function startingIconsResize (factor) {	
+	let sliderHeight = nvpContainer.offsetHeight / factor;	
+	narrativesSlider.style.height = Math.round(sliderHeight*(1+(1/factor)))+"px";
 }
 
 function narrativeProgressBarHighlight (narrative) {
@@ -235,6 +253,41 @@ function populateNarrativeDesc (narrative) {
 	narrativeDesc.innerHTML = `<p>${narrative.querySelector('img').dataset.title}</p>`;
 }
 
+function narrativeHighlight() {
+	let orderedNarratives = Array.from(narratives)
+	.map(narr => convertTime(narr))
+	.sort( function(a, b) {
+		if (a>=b) {
+			return -1
+		} else {
+			return 1
+		}
+	});
+	
+	let currentNarr = 0;
+	for (i=0; i < orderedNarratives.length; i++) {
+		if (orderedNarratives[i] < video.currentTime){
+			currentNarr = orderedNarratives.length - i -1;
+			break;
+		}				
+	};
+	narratives.forEach( function(narr, index) {
+		if (index == currentNarr) {
+			narr.querySelector('img').classList.add('highlight-narrative');
+			// can't figure out the CSS for showing a progress bar in each narrative
+			// without breaking EDGE display 
+			// narr.querySelector('.inner-progress').classList.remove('invisible');
+
+		} else {
+			narr.querySelector('img').classList.remove('highlight-narrative');
+			narr.querySelector('.inner-progress').classList.add('invisible');
+		}
+	});
+	
+
+	
+
+}
 
 
 // narratives listeners
@@ -246,28 +299,44 @@ narratives.forEach( function(narrative) {
 			narrativePlay(narrative);
 		}
 	})
+
 	narrative.addEventListener("mouseover", function() {
 		narrativeProgressBarHighlight(narrative);
 		narrativePos.classList.remove('invisible');
-		populateNarrativeDesc(narrative);
-		narrativeDesc.classList.remove('invisible');
 
+		// checking if text need be displayed
+		if (options.textDisplay != "no") {
+			populateNarrativeDesc(narrative);
+			narrativeDesc.classList.remove('invisible');
+		}
 	});
+
+	narrative.addEventListener("focus", function() {
+		narrativeProgressBarHighlight(narrative);
+		narrativePos.classList.remove('invisible');
+
+		// checking if text need be displayed
+		if (options.textDisplay != "no") {
+			populateNarrativeDesc(narrative);
+			narrativeDesc.classList.remove('invisible');
+		}
+	});
+
 	narrative.addEventListener("mouseout", function() {		
 		narrativePos.classList.add('invisible');
-		narrativeDesc.classList.add('invisible');
+		// checking if text need be displayed
+		if (options.textDisplay != "no") {
+			narrativeDesc.classList.add('invisible');
+		}
 	});	
 });
 
 window.addEventListener("resize", function () {	
-	narrativesIconsResize();
+	narrativesIconsResize(8);
 })
 
-// was getting wrong values, the below helps as per https://stackoverflow.com/questions/41674184/get-incorrect-offsetwidth-and-offsetheight-values
+startingIconsResize(8);
 
-setTimeout(function(){ 
-	narrativesIconsResize(); }
-	, 10);
 
 
 // control listeners
@@ -298,7 +367,14 @@ fullScreenButton.addEventListener("click", function (e) {
 
 // Progress
 progressContainer.addEventListener("click", navigateThroughProgressBar);
-video.addEventListener('timeupdate', videoProgress);
+video.addEventListener('timeupdate', function() {
+	videoProgress();
+	// to finish
+	narrativeHighlight();
+});
+
+
+
 
 
 

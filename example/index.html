@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>The narrative video player</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../src/nvp-styles.css">
     
   </head>
   <body>
@@ -23,11 +23,12 @@
 				{"url": "voitures.jpg", "start": "00:14", "title": "Car factory Wow !"},
 				{"url": "buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"}	
 				],
-			videoSource: "video.mp4",		
+			videoSource: "video.mp4",
+			textDisplay: "title", // no, title, titleAndDesc		
 		};
 	</script>
 
-	<script src="narrative-video-player.js"></script>
+	<script src="../src/nvp.js"></script>
   </body>
 </html>
 
