@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>The narrative video player</title>
     <link rel="stylesheet" href="sources/style.css">
-    <link rel="stylesheet" href="../nvp-source-v0.1/nvp-styles.css">
+    <link rel="stylesheet" href="./nvp-source-v01/nvp-styles.css">
     
   </head>
   <body>
@@ -25,9 +25,19 @@
 
 	<h1>One example</h1>
 
-	<div id="myvid">
+	<div id="myvid" class="nvp-video-container">
 		
 	    
+	</div>
+
+	<div class="credits">
+		<h2>Credits</h2>
+		<p>music : Camille Saint Saens - https://commons.wikimedia.org/wiki/File:Camille_Saint-Sa%C3%ABns_-_The_Carnival_of_the_Animals.ogg - Open Audio license</p>
+		<p>1st clip : from Pexels by Damon Hall https://www.pexels.com/video/aerial-footage-of-the-scenic-view-of-new-zealand-countryside-2869681/</p>
+		<p>2nd clip : from Pexels by Tom Fisk https://www.pexels.com/video/drone-footage-of-motor-vehicles-parked-on-a-storage-lot-3864111/</p>
+		<p>3rd clip : from Pexels by Kelly Lacey https://www.pexels.com/video/drone-shot-of-low-lying-clouds-over-the-mountain-valley-4287981/</p>
+		<p>4th clip : from Pexels by Kelly Lacey https://www.pexels.com/video/aeerial-view-of-city-with-tall-buildings-2818546/</p>
+		<p>All excerpts are released under a free to use license. Also if an error has been made, please enquire and we will remove.</p>
 	</div>
 
 
@@ -35,15 +45,15 @@
 		var options = {
 			ContainerId: "myvid",
 			images: [
-				{"url": "../example/montagne.jpg", "start": "00:00", "title":"Beautiful mountains of New Zealand"},
-				{"url": "../example/nuages.jpg", "start": "00:07", "title": "Blanket of clouds"},
-				{"url": "../example/voitures.jpg", "start": "00:14", "title": "Car factory Wow !"},
-				{"url": "../example/buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"}	
+				{"url": "./example/montagne.jpg", "start": "00:00", "title":"Beautiful mountains of New Zealand"},
+				{"url": "./example/nuages.jpg", "start": "00:07", "title": "Blanket of clouds"},
+				{"url": "./example/voitures.jpg", "start": "00:14", "title": "Car factory Wow !"},
+				{"url": "./example/buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"}	
 				],
-			videoSource: "../example/video.mp4",
+			videoSource: "./example/video.mp4",
 			textDisplay: "title", // no, title, titleAndDesc		
 		};
 	</script>
-	<script src="../nvp-source-v0.1/nvp.js"></script>
+	<script src="./nvp-source-v01/nvp.js"></script>
   </body>
 </html>
