@@ -22,7 +22,9 @@
 		<p>NVP will kinda diambiguates your video and help the viewer navigates it smoothly.</p>
 	</div>
 
-	<div id="myvid" class="nvp-video-container">
+	<h1>One example</h1>
+
+	<div id="myvid">
 		
 	    
 	</div>
@@ -32,12 +34,13 @@
 		var options = {
 			ContainerId: "myvid",
 			images: [
-				{"url": "montagne.jpg", "start": "00:00"},
-				{"url": "nuages.jpg", "start": "00:07"},
-				{"url": "voitures.jpg", "start": "00:14"},
-				{"url": "buildings.jpg", "start": "00:22"}	
+				{"url": "../example/montagne.jpg", "start": "00:00", "title":"Beautiful mountains of New Zealand"},
+				{"url": "../example/nuages.jpg", "start": "00:07", "title": "Blanket of clouds"},
+				{"url": "../example/voitures.jpg", "start": "00:14", "title": "Car factory Wow !"},
+				{"url": "../example/buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"}	
 				],
-			videoSource: "video.mp4",		
+			videoSource: "../example/video.mp4",
+			textDisplay: "title", // no, title, titleAndDesc		
 		};
 	</script>
 	<script src="narrative-video-player.js"></script>
