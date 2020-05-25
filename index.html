@@ -122,7 +122,13 @@
   			.then(response => response.json())
   			.then(function (data) {
   				tags = data;  
-  				document.querySelector('#github-version').innerHTML +=  " "+tags[0].name;
+  				let version = tags[0].name.replace('v','')
+  				if (parseInt(version) < 1) {
+  					version = "v"+version+" (beta)"
+  				} else {
+  					version = "v"+version
+  				}
+  				document.querySelector('#github-version').innerHTML +=  " "+version;
   								
   			});	
   		
