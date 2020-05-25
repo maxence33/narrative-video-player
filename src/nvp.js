@@ -5,6 +5,10 @@ let nvpContainer = document.querySelector(`#${options.ContainerId}`);
 
 
 function generateHTML (options) {
+
+	// adding an nvp class to main div
+	nvpContainer.classList.add('nvp-container');
+
 	let narrativesChildren = "";
 	options.images.map(function(narr){
 		
@@ -95,30 +99,44 @@ generateHTML(options);
 
 // initializing elements to be listened to or subjects to JS changes
 
-const narrativesSlider = document.querySelector('.narratives-slider');
-const narrativesWindow = document.querySelector('.narratives');
-const narratives = document.querySelectorAll('.narrative');
-const video = document.querySelector('.nvp-video-container .video');
-const playButton = document.querySelector('.play-button');
-const soundButton = document.querySelector('.sound-button');
-const soundSlider = document.querySelector('.sound-slider input[type="range"]');
-const progressBar = document.querySelector('.current-progress');
-const fullScreenButton = document.querySelector('.full-screen');
-const controlsBackground = document.querySelector(".nvp-video-container .controls-background");
-const controls = document.querySelector('.controls');
-const progressContainer = document.querySelector(".progress-bar-container");
-const narrativePos = document.querySelector(".narrative-position");
+const narrativesSlider = nvpContainer.querySelector('.narratives-slider');
+const narrativesWindow = nvpContainer.querySelector('.narratives');
+const narratives = nvpContainer.querySelectorAll('.narrative');
+const video = nvpContainer.querySelector('.video');
+const playButton = nvpContainer.querySelector('.play-button');
+const soundButton = nvpContainer.querySelector('.sound-button');
+const soundSlider = nvpContainer.querySelector('.sound-slider input[type="range"]');
+const progressBar = nvpContainer.querySelector('.current-progress');
+const fullScreenButton = nvpContainer.querySelector('.full-screen');
+const controlsBackground = nvpContainer.querySelector(".controls-background");
+const controls = nvpContainer.querySelector('.controls');
+const progressContainer = nvpContainer.querySelector(".progress-bar-container");
+const narrativePos = nvpContainer.querySelector(".narrative-position");
 const playImage= `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3.049 3.74" height="14.136" width="11.525"><path d="M.002 3.499c0 .223.156.306.348.187l2.556-1.599c.192-.12.19-.315 0-.435L.349.054C.156-.066 0 .022 0 .241V3.5h.002z" fill="#fff"/></svg>`;
 const pauseImage = `<svg width="69.4" height="82.1" viewBox="0 0 18.4 21.7" xmlns="http://www.w3.org/2000/svg"><g fill="#f9f9f9" color="#000"><path d="M3.3 0A3 3 0 00.9 1.3c-.5.8-.9 1.9-.9 3v13c0 1.2.4 2.3 1 3.1a3 3 0 002.3 1.3 3 3 0 002.3-1.3c.6-.8 1-1.9 1-3v-13c0-1.2-.4-2.3-1-3.1A3 3 0 003.3 0zM15 0a3 3 0 00-2.3 1.3c-.6.8-1 1.9-1 3v13c0 1.2.4 2.3 1 3.1a3 3 0 002.4 1.3 3 3 0 002.3-1.3c.6-.8 1-1.9 1-3v-13c0-1.2-.4-2.3-1-3.1A3 3 0 0015.1 0z"/></g></svg>` ;
 const soundIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4.18 3.84" height="14.53" width="15.8"><path d="M.64.96A.64.64 0 000 1.6v.64c0 .36.29.64.64.64h.4l1.09.96V0L1.04.96zm2.26.96c0-.19-.13-.32-.32-.32v.64c.2 0 .32-.13.32-.32zm.64 0A.96.96 0 002.8 1l-.1.3c.3.06.52.31.52.63s-.22.58-.51.64l.13.3c.38-.1.7-.49.7-.94zM2.76.31L2.63.6c.8.12 1.23.75 1.23 1.32 0 .58-.5 1.12-1.15 1.28l.12.29c.73-.16 1.35-.83 1.35-1.57 0-.73-.57-1.5-1.42-1.61z" fill="#fff"/></svg>`;
 const noSoundIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4.18 3.84" height="14.53" width="15.8"><path d="M2.78 1.26l-.26.26.4.4-.4.4.26.26.4-.4.4.4.25-.26-.4-.4.4-.4-.25-.26-.4.4zM.64.96A.64.64 0 000 1.6v.64c0 .36.29.64.64.64h.4l1.09.96V0L1.04.96z" color="#000" fill="#fff"/></svg>`;
 const fullScreenIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357" style="enable-background:new 0 0 357 357;" xml:space="preserve"><g><path style="color:#000000;fill:#ffffff" d="M51,229.5H0V357h127.5v-51H51V229.5z M0,127.5h51V51h76.5V0H0V127.5z M306,306h-76.5v51H357V229.5h-51V306z M229.5,0v51 H306v76.5h51V0H229.5z"/></g></svg>`;
-const narrativeDesc = document.querySelector(".text-display"); 
+const narrativeDesc = nvpContainer.querySelector(".text-display"); 
 
 playButton.innerHTML = playImage;
 soundButton.innerHTML = soundIcon;
 fullScreenButton.innerHTML = fullScreenIcon;
 
+// initializing other options 
+let narrSize = 8;
+if (options.narrativesSize == 'big') {
+	narrSize = 7;
+} else if (options.narrativesSize == 'bigger') {
+	narrSize = 6;
+}else if (options.narrativesSize == 'normal') {
+	narrSize = 8;
+} else if (options.narrativesSize == 'small') {
+	narrSize = 9;
+} else {
+	narrSize = parseInt(options.narrativesSize);
+}
+// const narrSize = parseInt(options.narrativesSize);
 // functions
 
 
@@ -332,10 +350,10 @@ narratives.forEach( function(narrative) {
 });
 
 window.addEventListener("resize", function () {	
-	narrativesIconsResize(8);
+	narrativesIconsResize(narrSize);
 })
 
-startingIconsResize(8);
+startingIconsResize(narrSize);
 
 
 
