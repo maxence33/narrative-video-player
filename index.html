@@ -48,6 +48,8 @@
 		<p>All excerpts are released under a free to use license. Also if an error has been made, please enquire and we will remove.</p>
 	</div>
 
+	
+
 
 	<script>
 		var options = {
@@ -67,8 +69,9 @@
   			.then(response => response.json())
   			.then(function (data) {
   				githubRepo = data;
-  				// document.querySelector('#github-repo').href = githubRepo.html_url;
-  				// document.querySelector('#github-stars').href = githubRepo.html_url;
+  				document.querySelector('#github-repo').href = githubRepo.html_url;
+  				document.querySelector('#github-stars').innerHTML +=  " "+githubRepo.stargazers_count;
+  				document.querySelector('#github-stars').href = githubRepo.stargazers_url;
   			});
 
   		
