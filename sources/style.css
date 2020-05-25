@@ -64,7 +64,7 @@ body {
 	box-shadow: inset 0 -1px 1px rgba(0,0,0,0.4), /*bottom internal shadow*/ inset 0 1px 1px rgba(255,255,255,0.6); /*top internal highlight*/
 }
 
-a.badge  {
+a.badge, span.badge  {
 	color: black;
 	text-decoration: none;
 	font-family: sans-serif;

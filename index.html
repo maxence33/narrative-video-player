@@ -21,8 +21,9 @@
 	</div>
 
 	<div id="badges">
-		<a id="github-repo" class="badge" href="" target="blank" rel="noopener noreferrer"><img src="./sources/github.svg"> to repo</a>
+		<a id="github-repo" class="badge" href="" target="blank" rel="noopener noreferrer"><img src="./sources/github.svg"> Github</a>
 		<a id="github-stars" class="badge" href="" target="blank" rel="noopener noreferrer"><img src="./sources/star.svg"></a>
+		<span id="github-version" class="badge">current version: </span>
 	</div>
 
 	
@@ -54,7 +55,7 @@
 		
 		<h1>Setup</h1>
 
-		<p>Setting up the nvp player is fairly easy, just add the js and css to your webpage and an HTML Div with a unique Id.</p>
+		<p>Setting up the nvp player is fairly easy, just add the js and css files to your webpage and create an HTML Div with a unique Id:</p>
 		<pre class="code">
  &lt;div id=&quot;myvid&quot;&gt;
  	
@@ -116,11 +117,13 @@
   				document.querySelector('#github-stars').href = githubRepo.stargazers_url;
   			});
 
-  		let releases = "";
-  		fetch('https://api.github.com/repos/maxence33/narrative-video-player/releases')
+  		let tags = "";
+  		fetch('https://api.github.com/repos/maxence33/narrative-video-player/tags')
   			.then(response => response.json())
   			.then(function (data) {
-  				releases = data;  				
+  				tags = data;  
+  				document.querySelector('#github-version').innerHTML +=  " "+tags[0].name;
+  								
   			});	
   		
   			
