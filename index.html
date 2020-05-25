@@ -3,17 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title>The narrative video player</title>
-    <link rel="stylesheet" href="sources/style.css">
+    <link rel="stylesheet" href="./sources/style.css">
     <link rel="stylesheet" href="./nvp-source-v01/nvp-styles.css">
     
   </head>
   <body>
 
+	
 
 	<div id="title">
 		<span id="t">the</span>
 		<span id="n">narrative</span>
 		<span id="v">video player</span>
+		
+
+	</div>
+
+	<div id="badges">
+		<a id="github-repo" class="badge" href="" target="blank" rel="noopener noreferrer"><img src="./sources/github.svg"> to repo</a>
+		<a id="github-stars" class="badge" href="" target="blank" rel="noopener noreferrer"><img src="./sources/star.svg"></a>
 	</div>
 
 	
@@ -54,11 +62,17 @@
 			textDisplay: "title", // no, title, titleAndDesc		
 		};
 
-		const githubRepo = fetch('https://api.github.com/repos/maxence33/narrative-video-player')
+		let githubRepo = "";
+		fetch('https://api.github.com/repos/maxence33/narrative-video-player')
   			.then(response => response.json())
-  			.then(data => console.log(data));
+  			.then(function (data) {
+  				githubRepo = data;
+  				// document.querySelector('#github-repo').href = githubRepo.html_url;
+  				// document.querySelector('#github-stars').href = githubRepo.html_url;
+  			});
 
-  			console.log()
+  		
+  			
 	</script>
 	<script src="./nvp-source-v01/nvp.js"></script>
   </body>
