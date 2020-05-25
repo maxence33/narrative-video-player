@@ -55,20 +55,28 @@
 		<h1>Setup</h1>
 
 		<p>Setting up the nvp player is fairly easy, just add the js and css to your webpage and an HTML Div with a unique Id.</p>
+		<pre class="code">
+ &lt;div id=&quot;myvid&quot;&gt;
+ 	
+ &lt;/div&gt;	
+		</pre>
 		<p>Then add the following Js script bit:</p>
-		<pre>
- var options = {
- ContainerId: "myvid",
- images: [
-	{"url": "./example/montagne.jpg", "start": "00:00", "title":"Beautiful mountains of New Zealand"},
-	{"url": "./example/nuages.jpg", "start": "00:07", "title": "Blanket of clouds"},
-	{"url": "./example/voitures.jpg", "start": "00:14", "title": "Car factory Wow !"},
-	{"url": "./example/buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"}	
-	],
- videoSource: "./example/video.mp4",
- textDisplay: "title", 
-					
- };
+		<pre class="code">
+ &lt;script&gt;			
+
+   var options = {
+   ContainerId: "myvid",
+   images: [
+     {"url": "./example/montagne.jpg", "start": "00:00", "title":"Beautiful mountains of New Zealand"},
+     {"url": "./example/nuages.jpg", "start": "00:07", "title": "Blanket of clouds"},
+     {"url": "./example/voitures.jpg", "start": "00:14", "title": "Car factory Wow !"},
+     {"url": "./example/buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"}	
+  	],
+   videoSource: "./example/video.mp4",
+   textDisplay: "title", 					
+   };
+
+ &lt;/script&gt; 
 		</pre>
 
 		<p><span class="strong">ContainerId</span> is the Id of the Div you have just created</p>
@@ -80,7 +88,7 @@
 
 	<div id="development" class="classic-paragraph">
 		<h1>Development</h1>
-		<p>Nvp is currently at Beta stage. A lot of further imrpovements are planned. But please still log issues on the github repo so I know what to prioritize.</p>
+		<p>Nvp is currently at Beta stage. A lot of further improvements are planned. But please still log issues on the github repo so I know what to prioritize.</p>
 		<p>Best</p>
 	</div>
 

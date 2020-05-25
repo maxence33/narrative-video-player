@@ -127,12 +127,22 @@ margin: 15px 0 0 0;
 	margin-top: 50px;
 }
 
-#setting-up-nvp pre{
+
+
+
+.code {
 	color: white;
-	
 	font-size: 1em;
-	/*margin: 0;
-	padding: 0;*/
+	background-color: #2b4676;
+	border-radius: 6px;
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;   
+	overflow: hidden;   
+	max-width: 900px; 
+	padding: 10px 0 0 0;
 }
 
 .strong {
