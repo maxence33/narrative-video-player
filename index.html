@@ -14,7 +14,8 @@
 	<div id="title">
 		<span id="t">the</span>
 		<span id="n">narrative</span>
-		<span id="v">video player</span>
+		<span id="v">video</span>
+		<span id="p">player</span>
 		
 
 	</div>
@@ -49,7 +50,39 @@
 	</div>
 
 	
+	<div id="setting-up-nvp" class="classic-paragraph">
+		
+		<h1>Setup</h1>
 
+		<p>Setting up the nvp player is fairly easy, just add the js and css to your webpage and an HTML Div with a unique Id.</p>
+		<p>Then add the following Js script bit:</p>
+		<pre>
+			var options = {
+			ContainerId: "myvid",
+			images: [
+				{"url": "./example/montagne.jpg", "start": "00:00", "title":"Beautiful mountains of New Zealand"},
+				{"url": "./example/nuages.jpg", "start": "00:07", "title": "Blanket of clouds"},
+				{"url": "./example/voitures.jpg", "start": "00:14", "title": "Car factory Wow !"},
+				{"url": "./example/buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"}	
+				],
+			videoSource: "./example/video.mp4",
+			textDisplay: "title", 
+					
+		};
+		</pre>
+
+		<p><span class="strong">ContainerId</span> is the Id of the Div you have just created</p>
+		<p><span class="strong">Images</span> is an array of objects containing three values : the source of the image (or Url), the exact time this image will start the video at and a short title that wil be seen when your mouse will hover this image.</p>
+		<p><span class="strong">videoSource</span> is the place where is located your video (pure video URL, Youtube or others not yet supported)</p>
+		<p><span class="strong">textDisplay</span> is an indicator of the title should be displayed on hover or not. Values accepted are "title" or "no".</p>
+
+	</div>
+
+	<div id="development" class="classic-paragraph">
+		<h1>Development</h1>
+		<p>Nvp is currently at Beta stage. A lot of further imrpovements are planned. But please still log issues on the github repo so I know what to prioritize.</p>
+		<p>Best</p>
+	</div>
 
 	<script>
 		var options = {
@@ -61,7 +94,8 @@
 				{"url": "./example/buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"}	
 				],
 			videoSource: "./example/video.mp4",
-			textDisplay: "title", // no, title, titleAndDesc		
+			textDisplay: "title", // no, title, titleAndDesc
+
 		};
 
 		let githubRepo = "";
@@ -74,6 +108,12 @@
   				document.querySelector('#github-stars').href = githubRepo.stargazers_url;
   			});
 
+  		let releases = "";
+  		fetch('https://api.github.com/repos/maxence33/narrative-video-player/releases')
+  			.then(response => response.json())
+  			.then(function (data) {
+  				releases = data;  				
+  			});	
   		
   			
 	</script>
