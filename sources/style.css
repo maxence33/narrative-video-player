@@ -117,8 +117,7 @@ margin: 15px 0 0 0;
 #setting-up-nvp {}
 
 .classic-paragraph p{
-	color: white;
-	font-family: sans-serif;
+	
 	font-size: 1em;
 	/*margin: 0;
 	padding: 0;*/
@@ -127,6 +126,11 @@ margin: 15px 0 0 0;
 .classic-paragraph h1{
 	margin-top: 50px;
 }
+
+.classic-paragraph {
+	color: white;
+	font-family: sans-serif;
+	}
 
 
 
