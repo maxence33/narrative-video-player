@@ -81,7 +81,12 @@
 		</pre>
 
 		<p><span class="strong">ContainerId</span> is the Id of the Div you have just created</p>
-		<p><span class="strong">Images</span> is an array of objects containing three values : the source of the image (or Url), the exact time this image will start the video at and a short title that wil be seen when your mouse will hover this image.</p>
+		<p><span class="strong">Images</span> is an array of objects containing definoing the narratives and what they look like.</p>
+		<ul>
+			<li>url : the location of the narrative image</li>
+			<li>start : starting point of the video for this narrative. The ending point is the following narrative start value.</li>
+			<li>title : a short description of the narrative breakpoint. It can be shown when hovering the image (this capability is handlled by option value "textDisplay" explained hereafter). Even if you have the ability to reveal this information or not it is important to populate accurately as visually impaired viewers will have access to this information in all cases.</li>
+		</ul>
 		<p><span class="strong">videoSource</span> is the place where is located your video (pure video URL, Youtube or others not yet supported)</p>
 		<p><span class="strong">textDisplay</span> is an indicator of the title should be displayed on hover or not. Values accepted are "title" or "no".</p>
 
