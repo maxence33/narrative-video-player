@@ -54,7 +54,11 @@ function generateHTML (options) {
 
 			<div class="narratives">
 				<div class="narratives-slider">
+					<div class="narr-inner-slider">
+						
 					${narrativesChildren}
+						
+					</div>
 				</div>					
 			</div>	
 			
@@ -301,10 +305,43 @@ function narrativeHighlight() {
 			narr.querySelector('.inner-progress').classList.add('invisible');
 		}
 	});
+		
+
+}
+
+function slidingSlider() {
+	const maxOffset = (innerSlider.offsetWidth - video.offsetWidth) / 2
+	if (hovering == true) {		
+			innerSlider.style.left = (parseInt(innerSlider.style.left) || 0) + sliderXOffset + "px";		
+	}
 	
 
-	
+	// stopping slider at both ends
 
+	if (Math.abs((parseInt(innerSlider.style.left) || 0)) > Math.abs(maxOffset)) {
+		if (Math.sign((parseInt(innerSlider.style.left) || 0)) == 1) {
+			innerSlider.style.left = maxOffset+"px";			
+		} else {
+			innerSlider.style.left = "-"+maxOffset+"px";			
+		}
+		
+	}
+}
+
+function getSliderXOffset(e) {
+	let mouseXPosition = 0;
+
+	mouseXPosition = e.offsetX / video.offsetWidth;
+	if (innerSlider.offsetWidth > video.offsetWidth) {
+		
+		if (mouseXPosition < 0.5) {
+			sliderXOffset = (0.5 - mouseXPosition)*50;			
+						
+		} else {
+			sliderXOffset = -(mouseXPosition - 0.5)*50;			
+		}	
+
+	}	
 }
 
 
@@ -312,8 +349,9 @@ function narrativeHighlight() {
 
 narratives.forEach( function(narrative) {
 	narrative.addEventListener("click", () => narrativePlay(narrative));	
-	narrative.addEventListener("keypress", function (e) {				
-		if (e.charCode == 32 ){
+	narrative.addEventListener("keypress", function (e) {		
+
+		if (e.charCode == 32 || e.charCode == 13){
 			narrativePlay(narrative);
 		}
 	})
@@ -392,9 +430,26 @@ video.addEventListener('timeupdate', function() {
 });
 
 
+// Sliding narratives if they extend outside video window
+let sliderXOffset = 0;
+let hovering = false;
+const innerSlider = document.querySelector('.narr-inner-slider');
 
 
+video.addEventListener('mousemove', function(e) {
+	getSliderXOffset(e);	
+});
 
+video.addEventListener('mouseover', function() {
+	hovering = true;
+	setInterval(slidingSlider, 40);
+	console.log("hovering is true");
+})
+
+video.addEventListener('mouseout', function() {
+	hovering = false;
+	console.log("hovering is false");
+})
 
 
 
