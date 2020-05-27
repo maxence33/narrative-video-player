@@ -140,7 +140,7 @@
   				githubRepo = data;
   				document.querySelector('#github-repo').href = githubRepo.html_url;
   				document.querySelector('#github-stars').innerHTML +=  " "+githubRepo.stargazers_count;
-  				document.querySelector('#github-stars').href = githubRepo.stargazers_url;
+  				document.querySelector('#github-stars').href = githubRepo.html_url;
   			});
 
   		let tags = "";
