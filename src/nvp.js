@@ -444,13 +444,11 @@ video.addEventListener('mousemove', function(e) {
 
 video.addEventListener('mouseover', function() {
 	hovering = true;
-	setInterval(slidingSlider, 40);
-	console.log("hovering is true");
+	setInterval(slidingSlider, 40);	
 })
 
 video.addEventListener('mouseout', function() {
-	hovering = false;
-	console.log("hovering is false");
+	hovering = false;	
 })
 
 
