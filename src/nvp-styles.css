@@ -182,7 +182,7 @@ video {
 		position: relative;
 		display: inline-block;
 		left: 1px;
-		transition: all 0.1s;
+		/*transition: all 0.1s;*/
 	}
 
 	/*.narr-inner-slider-mov {

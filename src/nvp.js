@@ -335,10 +335,12 @@ function getSliderXOffset(e) {
 	if (innerSlider.offsetWidth > video.offsetWidth) {
 		
 		if (mouseXPosition < 0.5) {
-			sliderXOffset = (0.5 - mouseXPosition)*50;			
+			sliderXOffset = (0.5 - mouseXPosition)*50*(video.offsetWidth/1000);	
+			// 	(video.offsetWidth/1000) allows bigger moves on bigger videos 	
 						
 		} else {
-			sliderXOffset = -(mouseXPosition - 0.5)*50;			
+			sliderXOffset = -(mouseXPosition - 0.5)*50*(video.offsetWidth/1000);
+			// 	(video.offsetWidth/1000) allows bigger moves on bigger videos 			
 		}	
 
 	}	
