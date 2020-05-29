@@ -7,70 +7,7 @@ body {
 	padding-bottom: 80px;
 }
 
-#title {
-	font-family: "Roboto";
-	font-weight: 900;
-	color: white;
 
-}
-
-#title #t {
-	font-size: 120px;
-	display: block;
-	/*text-shadow: 20px 10px 90px rgba(0, 0, 0, 0.3);*/
-
-}
-
-#title #n {
-	font-size: 120px;
-	display: block;
-	/*text-shadow: 20px 10px 90px rgba(0, 0, 0, 0.3);*/
-	margin-top: -60px;
-}
-
-#title #v {
-	font-size: 120px;
-	display: inline-block;
-	/*text-shadow: 20px 10px 90px rgba(0, 0, 0, 0.3);*/
-	margin: -60px 15px 0px 0;
-	
-	color: #ff5b9e;
-}
-
-#title #p {
-	font-size: 120px;
-	display: inline-block;
-	/*text-shadow: 20px 10px 90px rgba(0, 0, 0, 0.3);*/
-	margin: -60px 0 5px 0;
-	
-	color: #ff5b9e;
-}
-
-#badges {	
-	display: block;
-	position: relative;
-}
-
-#badges img{
-	height: 12px;	
-	vertical-align: baseline;	
-}
-
-.badge {
-	line-height: 1;
-	border-radius: 6px;
-	padding: 5px;
-	background-color: #d2c2fd;
-	box-shadow: inset 0 -1px 1px rgba(0,0,0,0.4), /*bottom internal shadow*/ inset 0 1px 1px rgba(255,255,255,0.6); /*top internal highlight*/
-	display: inline-block;
-}
-
-a.badge, span.badge  {
-	color: black;
-	text-decoration: none;
-	font-family: sans-serif;
-	font-size: 12px;
-}
 
 #intro {
 	margin: 30px 0 0 0;
