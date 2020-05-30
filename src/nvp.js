@@ -1,4 +1,5 @@
 
+
 // building the HTML inside passed id
 
 let nvpContainer = document.querySelector(`#${options.ContainerId}`);
@@ -147,13 +148,21 @@ if (options.narrativesSize == 'big') {
 function playVideo() {	
 	if (video.paused) {
 		video.play();
-		playButton.innerHTML = pauseImage;
+		togglePlayIcon();
 		keepRetracted ();		
 	} else {
 		video.pause();
-		playButton.innerHTML = playImage;	
+		togglePlayIcon();	
 		keepExtended();	
 	}	
+}
+
+function togglePlayIcon() {
+	if (video.paused) {
+		playButton.innerHTML = playImage;
+	} else {
+		playButton.innerHTML = pauseImage;
+	}
 }
 
 function keepExtended () {
@@ -197,15 +206,35 @@ function unFade () {
 }
 
 function toggleSound() {
-	if (video.volume == 0) {
+	if (video.volume == 0 || video.muted == true) {
 		video.volume = lastSavedVolume;
+		soundSlider.value = lastSavedVolume * 100;
+		video.muted = false;
 		if (lastSavedVolume != 0) {
 			soundButton.innerHTML = soundIcon;
 		}
 	} else {
 		video.volume = 0;
+		soundSlider.value = 0;
 		soundButton.innerHTML = noSoundIcon; 
 	}
+}
+
+function toggleSoundIconForMute() {
+	if (video.muted == true) {
+		video.volume = 0;
+		// video.volume = lastSavedVolume;
+		// if (lastSavedVolume != 0) {
+			soundButton.innerHTML = noSoundIcon; 
+			soundSlider.value = 0;
+		
+		// }
+	} 
+	// else {
+		
+	// 	video.volume = lastSavedVolume;
+	// 	soundButton.innerHTML = soundIcon;
+	// }
 }
 
 function soundVolume() {	
@@ -214,6 +243,7 @@ function soundVolume() {
 	if (video.volume == 0) {
 		soundButton.innerHTML = noSoundIcon;
 	} else {
+		video.muted = false;
 		soundButton.innerHTML = soundIcon;
 	}
 }
@@ -311,8 +341,10 @@ function narrativeHighlight() {
 
 function slidingSlider() {
 	const maxOffset = (innerSlider.offsetWidth - video.offsetWidth) / 2
+	
 	if (hovering == true) {		
-			innerSlider.style.left = (parseInt(innerSlider.style.left) || 0) + sliderXOffset + "px";		
+			innerSlider.style.left = (parseInt(innerSlider.style.left) || 0) + sliderXOffset + "px";	
+				
 	}
 	
 
@@ -330,8 +362,9 @@ function slidingSlider() {
 
 function getSliderXOffset(e) {
 	let mouseXPosition = 0;
-
+	
 	mouseXPosition = e.offsetX / video.offsetWidth;
+	
 	if (innerSlider.offsetWidth > video.offsetWidth) {
 		
 		if (mouseXPosition < 0.5) {
@@ -343,7 +376,10 @@ function getSliderXOffset(e) {
 			// 	(video.offsetWidth/1000) allows bigger moves on bigger videos 			
 		}	
 
-	}	
+	}	else {
+		// need to reset this value when user switch from fullscreen forth and back
+		sliderXOffset = 0;
+	}
 }
 
 
@@ -455,4 +491,42 @@ video.addEventListener('mouseout', function() {
 
 
 
+// CONTEXT MENU overrides
 
+
+// The below is not the right technique. Actually the context menu should be redone
+	// Play pause contexte
+
+video.addEventListener("play", function () {
+	togglePlayIcon();
+})
+
+video.addEventListener("pause", function () {
+	togglePlayIcon();
+})
+
+	// mute / audible context
+
+	// the following work with the two others gracefully. 
+	// The two others sound function had needed to be tweaked to accomodate for the mute context function
+
+video.addEventListener("volumechange", function() {	
+	toggleSoundIconForMute();
+})
+
+
+// video.addEventListener('fullscreenchange', function(e) {
+	// below solution isnt great, but prevent default not working on Fullscreen
+	// const removeFullScreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen || document.msExitFullscreen;
+ 
+	//   if (document.fullscreen) {
+	//   	removeFullScreen.call(document); 
+	  	 
+	//   };
+	// toggleFullScreen(nvpContainer);
+// });
+
+
+// window.addEventListener('contextmenu', function() {
+	
+// });
