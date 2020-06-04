@@ -57,10 +57,10 @@
 }
 
 a.badge, span.badge  {
-	color: black;
+	color: rgba(0, 0, 0, 0.8);
 	text-decoration: none;
 	font-family: sans-serif;
-	font-size: 12px;
+	font-size: 0.9em;
 }
 
 #menu ul {	
