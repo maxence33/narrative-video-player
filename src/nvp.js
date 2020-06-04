@@ -191,8 +191,8 @@ class nplayer{
 			this.images.map(function(narr){
 			
 			narrativesChildren += `
-						<div class='narrative' role="button" tabindex="0">
-							<img src='${narr.url}' data-time='${narr.start}' data-title='${narr.title}'>
+						<div class='narrative' role="button" tabindex="0" aria-label="${narr.title}">
+							<img src='${narr.url}' data-time='${narr.start}' data-title='${narr.title}' alt='${narr.title}'>
 							<div class='inner-progress invisible'>
 								<div class='inner-progress-default'>
 									<div class='inner-progress-advance'>
@@ -244,20 +244,20 @@ class nplayer{
 
 							
 							<div class="left">
-								<button class="play-button button" alt="play video" tabindex="0">				
+								<button class="play-button button" alt="play video" tabindex="0" aria-label="play video">				
 								</button>
 
-								<button class="sound-button button" alt="toggle sound" tabindex="0">				
+								<button class="sound-button button" alt="toggle sound" tabindex="0" aria-label="mute sound">				
 								</button>
 
 								<div class="sound-slider">						
-									<input type="range" min="0" max="100" value="100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" tabindex="0">						
+									<input type="range" min="0" max="100" value="100" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" tabindex="0" aria-label="sound volume">						
 								</div>
 							</div>				
 							
 
 							<div class="right">
-								<button class="full-screen button" alt="toggle fullscreen" tabindex="0">				
+								<button class="full-screen button" alt="toggle fullscreen" tabindex="0" aria-label="toggle fullscreen">				
 								</button>
 							</div>
 
