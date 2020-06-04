@@ -12,25 +12,56 @@
 		
 	    
 	</div>
+	<br><br><br><br><br><br><br><br>
+
+	<div id="myvid2">
+		
+	    
+	</div>
 
 
-	<script>
+
+	<script type="module">
+		
+		import nplayer from "../src/nvp.js";
+
+		var container = "myvid";
+		var container2 = "myvid2";
+
 		var options = {
 			ContainerId: "myvid",
 			images: [
-				{"url": "montagne.jpg", "start": "00:00", "title":"Beautiful mountains of New Zealand"},
-				{"url": "nuages.jpg", "start": "00:07", "title": "Blanket of clouds"},
-				{"url": "voitures.jpg", "start": "00:14", "title": "Car factory Wow !"},
-				{"url": "buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"},		
+				{"url": "./example/montagne.jpg", "start": "00:00", "title":"Beautiful mountains of New Zealand"},
+				{"url": "./example/nuages.jpg", "start": "00:07", "title": "Blanket of clouds"},
+				{"url": "./example/voitures.jpg", "start": "00:14", "title": "Car factory Wow !"},
+				{"url": "./example/buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"},		
 				],
-			videoSource: "video.mp4",
+			videoSource: "./example/video.mp4",
 			textDisplay: "title", // no, title, titleAndDesc
 			narrativesSize: "big"		
 		};
+
+		var options2 = {
+			ContainerId: "myvid",
+			images: [
+				{"url": "./example/montagne.jpg", "start": "00:00", "title":"Beautiful mountains of New Zealand"},
+				{"url": "./example/nuages.jpg", "start": "00:07", "title": "Blanket of clouds"},
+				{"url": "./example/voitures.jpg", "start": "00:14", "title": "Car factory Wow !"},
+				{"url": "./example/buildings.jpg", "start": "00:22", "title": "Buildings seen from the top"},	
+				{"url": "./example/buildings.jpg", "start": "00:24", "title": "Buildings seen from the top"},	
+				{"url": "./example/buildings.jpg", "start": "00:25", "title": "Buildings seen from the top"},	
+				{"url": "./example/buildings.jpg", "start": "00:26", "title": "Buildings seen from the top"},		
+				],
+			videoSource: "./example/video.mp4",
+			textDisplay: "title", // no, title, titleAndDesc
+			narrativesSize: "bigger"		
+		};
+
+		const player1 = new nplayer(container, options);
+		const player2 = new nplayer(container2, options2);
+		
 	</script>
 
-	<script src="../src/nvp.js"></script>
+	
   </body>
 </html>
-
-
