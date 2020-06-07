@@ -168,9 +168,9 @@
 		position: relative;		
 		height: 10vh; /*this value will be continuously reset*/
 		font-size: 0;
-		width: 200%;
+		width: 400%;
 		text-align: center;
-		margin-left: -50%;	
+		margin-left: -150%;	
 
 
 	}
@@ -431,6 +431,7 @@
 	-webkit-filter: opacity(1) !important;
 	filter: opacity(1) !important; 
 	transition: height 0.2s;
+	
 }
 
 

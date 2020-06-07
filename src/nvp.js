@@ -122,6 +122,10 @@ class nplayer{
 		this.soundSlider.addEventListener("mouseup", () => theplayer.soundBeingChanged = false);
 		this.soundSlider.addEventListener("change", () => theplayer.soundVolume());
 
+			// the below is for context overrides. But it is better to make a new context menu as all functions cannot be overriden
+
+			this.video.addEventListener("volumechange", () => theplayer.toggleSoundIconForMute());
+
 		// Play
 
 		this.playButton.addEventListener("click", () => theplayer.playVideo() );
@@ -130,6 +134,12 @@ class nplayer{
 			theplayer.alterPlayButton(theplayer.playImage); 
 			theplayer.keepExtended(); 
 		});
+		
+			// the below is for context overrides. But it is better to make a new context menu as all functions cannot be overriden
+
+			this.video.addEventListener("play", () => theplayer.togglePlayIcon() );
+
+			this.video.addEventListener("pause", () => theplayer.togglePlayIcon() );
 
 		// Fullscreen
 		this.fullScreenButton.addEventListener("click", function () {
@@ -394,12 +404,12 @@ class nplayer{
 
 
 	narrativesIconsResize (factor) {		
-		let sliderHeight = Math.round(this.container.offsetHeight / factor);	
+		let sliderHeight = Math.round(this.video.offsetHeight / factor);	
 		this.narrativesSlider.style.height = sliderHeight+"px";	
 	}
 
 	startingIconsResize (factor) {	
-		let sliderHeight = this.container.offsetHeight / factor;	
+		let sliderHeight = this.video.offsetHeight / factor;	
 		this.narrativesSlider.style.height = Math.round(sliderHeight*(1+(1/factor)))+"px";
 	}
 
