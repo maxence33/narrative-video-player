@@ -6,3 +6,4 @@ Navigation through progress bar can be deactivated, as it is no longer the prima
 
 Please check page : www.narrativeplayer.com
 
+![alt text](https://github.com/maxence33/narrative-video-player/blob/master/The%20narrative%20video%20player.png)
